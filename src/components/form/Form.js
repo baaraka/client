@@ -1,6 +1,8 @@
 import { Button, Paper, TextField, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import FileBase from "react-file-base64";
+import { useDispatch } from "react-redux";
+import { createPost } from "../../actions/posts";
 
 import useStyles from "./styles";
 
@@ -14,8 +16,12 @@ export default function Form() {
   });
 
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createPost(postData));
+  };
 
   const clear = () => {};
 
@@ -25,7 +31,7 @@ export default function Form() {
         autoComplete="off"
         noValidate
         className={`${classes.root} ${classes.form}`}
-        onsubmit={handleSubmit}
+        onSubmit={handleSubmit}
       >
         <Typography variant="h6">Creating a memory</Typography>
         <TextField
